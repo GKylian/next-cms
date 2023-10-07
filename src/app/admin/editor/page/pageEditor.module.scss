@@ -3,7 +3,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: red;
+    background-color: #f3f2ef;
 }
 
 .main {
@@ -35,21 +35,6 @@
         align-items: center;
         justify-content: flex-start;
         gap: 24px;
-    
-        input {
-            padding: 8px 16px;
-            text-align: center;
-            font-size: 16px;
-            font-weight: 600;
-            background-color: #f5f5f5;
-            color: #3A3B41;
-            outline: none; border: none;
-            border-radius: 8px;
-
-            &:focus {
-                outline: 2px solid #66acf7;
-            }
-        }
     }
     
     .icon {
@@ -70,7 +55,45 @@
         }
         
     }
-    
+
+    input {
+        padding: 8px 16px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: #f5f5f5;
+        color: #3A3B41;
+        outline: none; border: none;
+        border-radius: 8px;
+
+        &:focus {
+            outline: 2px solid #66acf7;
+        }
+    }
+
+    .zoomControls {
+        margin-right: 16px;
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+
+        input {
+            width: 8ch;
+        }
+
+        button {
+            padding: 4px;
+            font-weight: 500;
+            font-size: 32px;
+            display: inline-flex;
+            align-items: center;
+            background-color: transparent;
+            color: white;
+            border: none; outline: none;
+            cursor: pointer;
+        }
+    }
     
     .saveBtn {
         display: flex;
@@ -101,6 +124,7 @@
 
 
 
+// !===== Block editor =====
 .pagePreview {
     margin: 0 auto;
     max-height: 100%;
