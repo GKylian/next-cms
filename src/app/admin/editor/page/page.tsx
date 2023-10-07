@@ -1,13 +1,16 @@
 'use client'
 
+import BlocksEditor from "./components/BlocksEditor"
+import styles from './pageEditor.module.scss'
+
 type Props = {}
 function PageEditor({ }: Props) {
 
 
     return (
-        <div>
-            Page Editor
-        </div>
+        <>
+            <BlocksEditor />
+        </>
     )
 }
 export default PageEditor
