@@ -1,12 +1,18 @@
+'use client'
+
 import styles from '../pageEditor.module.scss'
 import LogoMenu from '/public/bars-solid.svg'
 import LogoBlocks from '/public/cube-solid.svg'
 import LogoHierarchy from '/public/layer-group-solid.svg'
 import LogoStyling from '/public/fill-drip-solid.svg'
 import LogoCaret from '/public/angle-down-solid.svg'
+import { usePageEditorContext } from '../PageEditorContext'
 
 type Props = {}
 function PageEditorHeader({ }: Props) {
+    
+    const { editor, setEditor, page, setPage } = usePageEditorContext();
+
     return (
         <header className={styles.header}>
             <div className={styles.flexGroup}>
@@ -21,7 +27,8 @@ function PageEditorHeader({ }: Props) {
                 </button>
             </div>
             <div className={styles.flexGroup}>
-                <input type="text" name="pageNameInput" id="pageNameInput" placeholder="Page Name..." />
+                <input type="text" name="pageNameInput" id="pageNameInput" placeholder="Page Name..."
+                    value={page.title} onChange={(e) => setPage((_page) => ({..._page, title: e.target.value || _page.title}))} />
             </div>
             <div className={styles.flexGroup}>
                 <button className={styles.icon}>

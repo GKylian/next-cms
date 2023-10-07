@@ -1,9 +1,14 @@
-export const testData = {
+export const testData: PageData = {
     "type": "page",
+    "id": "adwam821n123",
     "title": "Page Title",
     "description": "Page Description",
-    "icon": "https://www.example.com/icon.png",
+    "keywords": ["keyword1", "keyword2", "keyword3"],
+    "iconURL": "https://www.example.com/icon.png",
     "author": "Author Name",
+    "createdAt": "2007-04-05T14:30",
+    "updatedAt": "2023-07-10T19:02",
+    "properties": {},
     "blocks": [
         {
             "type": "flexbox",
