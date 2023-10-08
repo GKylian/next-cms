@@ -161,3 +161,24 @@
     border-top: 2px dashed #66acf7;
     background-color: white;
 }
+
+
+
+
+// !===== Blocks (default styling, overriden by inline-css) =====
+.container {
+    padding: 8px;
+    &:empty {
+        min-height: 32px;
+    }
+
+    .sortableBlock:last-child {
+        margin-bottom: 16px;
+    }
+}
+
+.sortableBlock {
+    &:hover {
+        outline: 2px solid #66acf7;
+    }
+}

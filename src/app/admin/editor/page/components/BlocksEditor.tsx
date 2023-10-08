@@ -1,18 +1,25 @@
 'use client'
 
-import { useState } from 'react';
 import styles from '../pageEditor.module.scss'
 import { usePageEditorContext } from '../PageEditorContext';
+import { SortableContext } from '@dnd-kit/sortable';
+import { getChildren, getChildrenIds } from './blocks';
+import SortableBlock from './SortableBlock';
 
 type Props = {}
 function BlocksEditor({ }: Props) {
-    const { editor } = usePageEditorContext();
+    const { editor, blocks, setBlocks } = usePageEditorContext();
 
     return (
         <div className={styles.pagePreview} style={{ backgroundColor: 'white' }}>
             <div className={styles.blockArea} style={{ zoom: `${editor.zoom}`, width: `1920px` }}>
-                <div>1 - Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro explicabo aut rerum sed, repudiandae facilis pariatur soluta qui facere iste unde natus voluptatibus fugit officia fugiat placeat, rem minima accusamus?</div>
-
+                <SortableContext items={getChildrenIds(blocks, undefined)} strategy={() => null}>
+                    {
+                        getChildren(blocks, "").map((block, index) => (
+                            <SortableBlock key={block.blockId} blocks={blocks} block={block} />
+                        ))
+                    }
+                </SortableContext>
             </div>
             <div className={styles.pageBottomSpacer}></div>
         </div>
