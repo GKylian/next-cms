@@ -17,10 +17,13 @@ function PageEditorHeader({ }: Props) {
     const [zoom, setZoom] = useState<string>(Math.round(editor.zoom * 100) + "%");
     
     const updateEditorZoom = (newZoom: number) => {
+        newZoom = clampZoom(newZoom); //FIXME: Currently not allowing zooming out because of rendering issues (overflow computed before transform: scale())
         if (!isNaN(newZoom))
             setEditor((_editor) => ({..._editor, zoom: newZoom}));
         setZoom(Math.round(newZoom * 100) + "%");
     }
+
+    const clampZoom = (newZoom: number) => Math.max(1.0, Math.min(5.0, newZoom));
 
     return (
         <header className={styles.header}>

@@ -128,9 +128,8 @@
 .pagePreview {
     margin: 0 auto;
     max-height: 100%;
-    max-width: 90%;
     overflow: auto;
-    scrollbar-gutter: stable; // Leaves space for the vertical scrollbar, otherwise the horizontal scrollbar is always visible.
+    // scrollbar-gutter: stable; // Leaves space for the vertical scrollbar, otherwise the horizontal scrollbar is always visible.
 
     &::-webkit-scrollbar {
         width: 12px;
