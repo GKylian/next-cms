@@ -11,6 +11,8 @@ interface PageEditorContextProps {
     setPage: Dispatch<SetStateAction<PageInfo>>,
     blocks: BlockData[],
     setBlocks: Dispatch<SetStateAction<BlockData[]>>,
+    activeBlock: { block: BlockData|null, dragging: boolean },
+    setActiveBlock: Dispatch<SetStateAction<{ block: BlockData|null, dragging: boolean }>>,
 }
 
 const PageEditorContext = createContext<PageEditorContextProps>({
@@ -20,13 +22,17 @@ const PageEditorContext = createContext<PageEditorContextProps>({
     setPage: (): PageInfo => ({} as PageInfo),
     blocks: [],
     setBlocks: (): BlockData[] => [],
+    activeBlock: { block: null, dragging: false },
+    setActiveBlock: (): { block: BlockData|null, dragging: boolean } => ({ block: null, dragging: false }),
 })
 
 
 
 export const PageEditorProvider = ({ children }: { children: React.ReactNode }) => {
-    let {blocks: pageBlocks, ...pageInfo} = testData
-    const [blocks, setBlocks] = useState<BlockData[]>(pageBlocks)
+    let {blocks: pageBlocks, ...pageInfo} = testData;
+    const [blocks, setBlocks] = useState<BlockData[]>(pageBlocks);
+    const [activeBlock, setActiveBlock] = useState<{ block: BlockData|null, dragging: boolean }>({ block: null, dragging: false });
+
     const [page, setPage] = useState<PageInfo>(pageInfo);
     const [editor, setEditor] = useState<PageEditor>({
         zoom: 1,
@@ -34,7 +40,7 @@ export const PageEditorProvider = ({ children }: { children: React.ReactNode }) 
     });
 
     return (
-        <PageEditorContext.Provider value={{editor, setEditor, page, setPage, blocks, setBlocks}}>
+        <PageEditorContext.Provider value={{editor, setEditor, page, setPage, blocks, setBlocks, activeBlock, setActiveBlock}}>
             {children}
         </PageEditorContext.Provider>
     )

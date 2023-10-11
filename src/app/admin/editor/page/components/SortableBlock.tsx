@@ -17,7 +17,7 @@ function SortableBlock({ blocks, block }: Props) {
     let style: any = {
         transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
         // transition,
-        opacity: isDragging ? 0.5 : undefined,
+        // opacity: isDragging ? 0.5 : undefined,
     };
 
     if (isDragging) {

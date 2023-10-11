@@ -12,3 +12,12 @@ export function getChildrenIds(blocks: BlockData[], parentId: string | undefined
     if (parentId === undefined) return blocks.map((block) => block.blockId);
     return getChildren(blocks, parentId).map((block) => block.blockId);
 }
+
+export function getChildrenIndices(blocks: BlockData[], parentId: string | undefined): number[] {
+    if (parentId === undefined) return blocks.map((block, index) => index);
+    return blocks.map((block, index) => index).filter((index) => blocks[index].parentId === parentId);
+}
+
+export function getBlockIndex(blocks: BlockData[], blockId: string): number {
+    return blocks.findIndex((block) => block.blockId === blockId);
+}
