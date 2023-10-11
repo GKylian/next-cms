@@ -21,8 +21,10 @@ function SortableBlock({ blocks, block }: Props) {
     };
 
     if (isDragging) {
-        <div ref={setNodeRef} className={styles.dragLine} style={style} {...attributes} {...listeners}>
-        </div>
+        return (
+            <div ref={setNodeRef} className={styles.dragLine} style={style} {...attributes} {...listeners}>
+            </div>
+        )
     }
 
     return (
