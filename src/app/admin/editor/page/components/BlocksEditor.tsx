@@ -11,6 +11,7 @@ import { createPortal } from 'react-dom';
 
 type Props = {}
 function BlocksEditor({ }: Props) {
+    if (typeof window === "undefined") return <div></div>;
     const { editor, blocks, setBlocks, activeBlock, setActiveBlock } = usePageEditorContext();
 
     const mousePos = useRef({ x: 0, y: 0 });
