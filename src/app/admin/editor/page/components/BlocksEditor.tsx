@@ -8,6 +8,7 @@ import SortableBlock from './SortableBlock';
 import { useEffect, useRef, useState } from 'react';
 import { ClientRect, DragEndEvent, DragMoveEvent, DragOverlay, DragStartEvent, useDndMonitor } from '@dnd-kit/core';
 import { createPortal } from 'react-dom';
+import dynamic from 'next/dynamic';
 
 type Props = {}
 function BlocksEditor({ }: Props) {
@@ -156,7 +157,7 @@ function BlocksEditor({ }: Props) {
     }
 
 }
-export default BlocksEditor
+export default dynamic(() => Promise.resolve(BlocksEditor), { ssr: false });
 
 
 
