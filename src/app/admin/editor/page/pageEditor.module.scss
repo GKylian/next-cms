@@ -189,4 +189,29 @@
     &:hover {
         outline: 2px dashed #66acf7;
     }
+
+    .text {
+        width: 100%;
+
+        &:empty {
+            min-height: 32px;
+        }
+    }
+
+    textarea.text {
+        outline: 2px solid #66acf7;
+    }
+}
+
+// Default values for blocks
+.text {
+    padding: 0;
+    margin: 0;
+    border: none; outline: none;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    resize: none;
+    overflow: visible;
+    white-space: pre-line;
 }
