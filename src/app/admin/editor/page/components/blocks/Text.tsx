@@ -8,7 +8,7 @@ type Props = {
     blocks: BlockData[],
     block: BlockData,
 }
-function Flexbox({ blocks, block }: Props) {
+function Text({ blocks, block }: Props) {
     const type = {type: block.properties.type || "p"};
 
     const { activeBlock, setActiveBlock } = usePageEditorContext();
@@ -60,4 +60,4 @@ function Flexbox({ blocks, block }: Props) {
         </type.type>
     )
 }
-export default Flexbox
+export default Text
