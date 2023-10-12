@@ -11,7 +11,7 @@ type Props = {
 function Text({ blocks, block }: Props) {
     const type = {type: block.properties.type || "p"};
 
-    const { activeBlock, setActiveBlock } = usePageEditorContext();
+    const { activeBlock, setActiveBlock, setBlocks } = usePageEditorContext();
 
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(block.properties.text || "This is a text block. Click here to edit it.");
@@ -45,13 +45,21 @@ function Text({ blocks, block }: Props) {
             setActiveBlock({block: null, dragging: false});
         }
     }
+
+    const updateText = (text: string) => {
+        setText(text);
+        setBlocks((cblocks) => cblocks.map(b => {
+            if(b.blockId !== block.blockId) return b;
+            return {...b, properties: {...b.properties, text}};
+        }))
+    }
     
     return (
         <type.type className={`${styles.text}`}
             onDoubleClick={() => setEditing(true)}>
             {isEditing ? (
                 <textarea className={`${styles.text}`} value={text} ref={inputRef}
-                    onChange={(e) => { setText(e.target.value); adjustInputHeight(); } }
+                    onChange={(e) => { updateText(e.target.value); adjustInputHeight(); } }
                     onBlur={() => setEditing(false)}
                     onKeyDown={(e) => { if(e.key==="Escape") setIsEditing(false); } }/>
             ) : (
