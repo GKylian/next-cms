@@ -190,6 +190,10 @@
         outline: 2px dashed #66acf7;
     }
 
+    &.selected {
+        outline: 2px solid #66acf7;
+    }
+
     .text {
         width: 100%;
 
@@ -214,4 +218,5 @@
     resize: none;
     overflow: visible;
     white-space: pre-line;
+    user-select: none;
 }
