@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
     if (!req.body) return new Response(JSON.stringify({ message: "Missing body !" }), { status: 400 });
     const page: PageData = await req.json();
-    page.updatedAt = new Date().toISOString();
+    page.updatedAt = new Date();
 
     if (!page.url || !page.title || !page.blocks) 
         return new Response(JSON.stringify({ message: "Missing parameters (url, title or blocks) !" }), { status: 400 });
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
     if (!req.body) return new Response(JSON.stringify({ message: "Missing body !" }), { status: 400 });
     const page: PageData = await req.json();
-    page.updatedAt = new Date().toISOString();
+    page.updatedAt = new Date();
 
     if (!page.url || !page.title || !page.blocks) 
         return new Response(JSON.stringify({ message: "Missing parameters (url, title or blocks) !" }), { status: 400 });
