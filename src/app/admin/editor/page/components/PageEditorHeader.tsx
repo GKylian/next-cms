@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 type Props = {}
 function PageEditorHeader({ }: Props) {
     
-    const { editor, setEditor, page, setPage } = usePageEditorContext();
+    const { editor, setEditor, page, setPage, blocks } = usePageEditorContext();
 
     const [zoom, setZoom] = useState<string>(Math.round(editor.zoom * 100) + "%");
     
@@ -24,6 +24,25 @@ function PageEditorHeader({ }: Props) {
     }
 
     const clampZoom = (newZoom: number) => Math.max(1.0, Math.min(5.0, newZoom));
+
+    const savePage = async () => {
+        if (!page) return;
+        const savedPage = { ...page, blocks };
+        try {
+            const res = await fetch("/api/page", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(savedPage)
+            });
+            
+            if (res.ok) console.log("Page saved successfully");
+            else console.log("Error saving page");
+        } catch (error) {
+            console.error("Error saving page", error);
+        }
+    }
 
     return (
         <header className={styles.header}>
@@ -40,8 +59,11 @@ function PageEditorHeader({ }: Props) {
             </div>
 
             <div className={styles.flexGroup}>
-                <input className={styles.titleInput} type="text" name="pageNameInput" id="pageNameInput" placeholder="Page Name..."
-                    value={page.title} onChange={(e) => setPage((_page) => ({..._page, title: e.target.value || _page.title}))} />
+                <input className={styles.titleInput} type="text" name="pageNameInput" id="pageNameInput" placeholder="Page Name..." disabled={!page}
+                    value={page?.title || ""} onChange={(e) => setPage((_page) => {
+                        if (!_page) return _page;
+                        return {..._page, title: e.target.value};
+                    })} />
             </div>
 
             <div className={styles.flexGroup}>
@@ -56,7 +78,7 @@ function PageEditorHeader({ }: Props) {
                 <button className={styles.icon}>
                     <LogoStyling />
                 </button>
-                <button className={styles.saveBtn}>
+                <button className={styles.saveBtn} onClick={savePage}>
                     <p>Save</p>
                     <LogoCaret />
                 </button>

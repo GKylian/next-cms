@@ -11,9 +11,9 @@ type BlockData = {
 
 
 type PageData = {
+    url: string,
     type: string,
     title: string,
-    id: string,
     description: string,
     keywords: string[],
     author: string,
@@ -30,6 +30,9 @@ type PageInfo = Omit<PageData, "blocks">
 
 
 type PageEditor = {
+    isLoading: boolean,
+    isSaving: boolean,
+    error: string,
     zoom: number,
     openPanes: string[]
 }
