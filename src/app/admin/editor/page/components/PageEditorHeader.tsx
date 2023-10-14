@@ -40,8 +40,11 @@ function PageEditorHeader({ }: Props) {
             </div>
 
             <div className={styles.flexGroup}>
-                <input className={styles.titleInput} type="text" name="pageNameInput" id="pageNameInput" placeholder="Page Name..."
-                    value={page.title} onChange={(e) => setPage((_page) => ({..._page, title: e.target.value || _page.title}))} />
+                <input className={styles.titleInput} type="text" name="pageNameInput" id="pageNameInput" placeholder="Page Name..." disabled={!page}
+                    value={page?.title || ""} onChange={(e) => setPage((_page) => {
+                        if (!_page) return _page;
+                        return {..._page, title: e.target.value};
+                    })} />
             </div>
 
             <div className={styles.flexGroup}>
