@@ -18,8 +18,8 @@ type PageData = {
     keywords: string[],
     author: string,
     iconURL: string,
-    createdAt: string,
-    updatedAt: string,
+    createdAt: Date,
+    updatedAt: Date,
     properties: {
         [key: string]: any
     }

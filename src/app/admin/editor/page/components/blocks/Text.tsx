@@ -55,10 +55,10 @@ function Text({ blocks, block }: Props) {
     }
     
     return (
-        <type.type className={`${styles.text}`}
+        <type.type className={`${styles.text} text`}
             onDoubleClick={() => setEditing(true)}>
             {isEditing ? (
-                <textarea className={`${styles.text}`} value={text} ref={inputRef}
+                <textarea className={`${styles.text} text`} value={text} ref={inputRef}
                     onChange={(e) => { updateText(e.target.value); adjustInputHeight(); } }
                     onBlur={() => setEditing(false)}
                     onKeyDown={(e) => { if(e.key==="Escape") setIsEditing(false); } }/>

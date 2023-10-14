@@ -1,9 +1,11 @@
+import { revalidate } from "@/app/page";
 import prisma from "@/app/util/prisma";
+import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
     const url = req.nextUrl.searchParams.get("url");
-    if (!url)
+    if (url === null || url === undefined)
         return new Response(JSON.stringify({ message: "Missing parameters (url) !" }), { status: 400 });
 
     try {
@@ -27,9 +29,9 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
     if (!req.body) return new Response(JSON.stringify({ message: "Missing body !" }), { status: 400 });
     const page: PageData = await req.json();
-    page.updatedAt = new Date().toISOString();
+    page.updatedAt = new Date();
 
-    if (!page.url || !page.title || !page.blocks) 
+    if ((page.url === null || page.url === undefined) || (page.title === null || page.title === undefined) || !page.blocks)
         return new Response(JSON.stringify({ message: "Missing parameters (url, title or blocks) !" }), { status: 400 });
 
     try {        
@@ -40,6 +42,7 @@ export async function POST(req: NextRequest) {
         return new Response(JSON.stringify({ message: "Could not create page !\n"+error }), { status: 500 });
     }
     
+    revalidatePath("/"+page.url);
 
     return new Response(JSON.stringify({ message: "Page successfully created !" }), { status: 201 });
 }
@@ -49,9 +52,9 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
     if (!req.body) return new Response(JSON.stringify({ message: "Missing body !" }), { status: 400 });
     const page: PageData = await req.json();
-    page.updatedAt = new Date().toISOString();
+    page.updatedAt = new Date();
 
-    if (!page.url || !page.title || !page.blocks) 
+    if ((page.url === null || page.url === undefined) || (page.title === null || page.title === undefined) || !page.blocks)
         return new Response(JSON.stringify({ message: "Missing parameters (url, title or blocks) !" }), { status: 400 });
 
     try {
@@ -65,6 +68,8 @@ export async function PUT(req: NextRequest) {
         return new Response(JSON.stringify({ message: "Could not update page !\n"+error }), { status: 500 });
     }
 
+    revalidatePath("/"+page.url);
+
     return new Response(JSON.stringify({ message: "Page successfully updated !" }), { status: 200 });
 }
 
@@ -73,7 +78,7 @@ export async function PUT(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
     const url = req.nextUrl.searchParams.get("url");
 
-    if (!url)
+    if (url === null || url === undefined)
         return new Response(JSON.stringify({ message: "Missing parameters (url) !" }), { status: 400 });
 
     try {
@@ -85,6 +90,8 @@ export async function DELETE(req: NextRequest) {
     } catch (error) {
         return new Response(JSON.stringify({ message: "Could not delete page !\n"+error }), { status: 500 });
     }
+
+    revalidatePath("/"+url);
 
     return new Response(JSON.stringify({ message: "Page successfully deleted !" }), { status: 200 });
 }

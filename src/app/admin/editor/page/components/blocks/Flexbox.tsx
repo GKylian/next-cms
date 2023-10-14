@@ -12,7 +12,7 @@ type Props = {
 function Flexbox({ blocks, block }: Props) {
 
     return (
-        <div className={`${styles.container} ${styles.flexbox}`}>
+        <div className={`${styles.container} ${styles.flexbox} flexbox`}>
             <SortableContext items={getChildrenIds(blocks, block.blockId)} strategy={() => null}>
                 {getChildren(blocks, block.blockId).map((child, index) => (
                     <SortableBlock key={child.blockId} blocks={blocks} block={child} />
