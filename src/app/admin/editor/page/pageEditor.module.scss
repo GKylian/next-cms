@@ -108,11 +108,17 @@
         color: inherit;
         cursor: pointer;
         fill: white;
+        p {
+            color: white;
+        }
     
         &:hover {
             color: #66acf7;
             fill: #66acf7;
             transform: scale(1.05);
+            p {
+                color: #66acf7;
+            }
         }
 
         svg {
@@ -398,7 +404,6 @@
 
 // !===== Blocks (default styling, overriden by inline-css) =====
 .container {
-    padding: 8px;
     &:empty {
         min-height: 32px;
     }
@@ -419,6 +424,7 @@
 
     .text {
         width: 100%;
+        user-select: none;
 
         &:empty {
             min-height: 32px;
@@ -430,16 +436,8 @@
     }
 }
 
-// Default values for blocks
 .text {
-    padding: 0;
-    margin: 0;
-    border: none; outline: none;
-    font-family: sans-serif;
-    font-size: 16px;
-    font-weight: 400;
     resize: none;
     overflow: visible;
-    white-space: pre-line;
-    user-select: none;
+    border: none; outline: none;
 }
