@@ -1,4 +1,6 @@
+import { revalidate } from "@/app/page";
 import prisma from "@/app/util/prisma";
+import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -40,6 +42,7 @@ export async function POST(req: NextRequest) {
         return new Response(JSON.stringify({ message: "Could not create page !\n"+error }), { status: 500 });
     }
     
+    revalidatePath("/"+page.url);
 
     return new Response(JSON.stringify({ message: "Page successfully created !" }), { status: 201 });
 }
@@ -65,6 +68,8 @@ export async function PUT(req: NextRequest) {
         return new Response(JSON.stringify({ message: "Could not update page !\n"+error }), { status: 500 });
     }
 
+    revalidatePath("/"+page.url);
+
     return new Response(JSON.stringify({ message: "Page successfully updated !" }), { status: 200 });
 }
 
@@ -85,6 +90,8 @@ export async function DELETE(req: NextRequest) {
     } catch (error) {
         return new Response(JSON.stringify({ message: "Could not delete page !\n"+error }), { status: 500 });
     }
+
+    revalidatePath("/"+url);
 
     return new Response(JSON.stringify({ message: "Page successfully deleted !" }), { status: 200 });
 }
