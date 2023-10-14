@@ -11,9 +11,9 @@ type BlockData = {
 
 
 type PageData = {
+    url: string,
     type: string,
     title: string,
-    id: string,
     description: string,
     keywords: string[],
     author: string,
