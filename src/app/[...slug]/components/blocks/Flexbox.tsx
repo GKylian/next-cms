@@ -10,7 +10,7 @@ export default function Flexbox({ blocks, block }: Props) {
     return (
         <div className="flexbox">
             {getChildren(blocks, block.blockId).map((block, i) => (
-                <Block blocks={blocks} block={block} />
+                <Block key={block.blockId} blocks={blocks} block={block} />
             ))}
         </div>
     )
