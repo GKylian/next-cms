@@ -12,7 +12,6 @@ import dynamic from 'next/dynamic';
 
 type Props = {}
 function BlocksEditor({ }: Props) {
-    if (typeof window === "undefined") return <div></div>;
     const { editor, blocks, setBlocks, activeBlock, setActiveBlock } = usePageEditorContext();
 
     const mousePos = useRef({ x: 0, y: 0 });
@@ -108,7 +107,7 @@ function BlocksEditor({ }: Props) {
 
 
 
-
+    if (typeof window === "undefined") return <div></div>;
 
     return (
         <div className={styles.pagePreview} style={{ backgroundColor: 'white', width: `${previewWidth*editor.zoom}px`}}
