@@ -51,13 +51,8 @@ export const PageEditorProvider = ({ children }: { children: React.ReactNode }) 
         if (data.message) return;
         setBlocks(data.blocks);
         delete data.blocks;
-        console.log(data);
         setPage(data);
     }, [data]);
-
-    useEffect(() => {
-        console.log(blocks);
-    }, [blocks])
     
 
     return (
