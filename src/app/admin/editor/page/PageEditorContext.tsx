@@ -38,11 +38,27 @@ export const PageEditorProvider = ({ children }: { children: React.ReactNode }) 
     const [page, setPage] = useState<PageInfo>();
     const [editor, setEditor] = useState<PageEditor>({
         zoom: 1,
-        openPanes: []
+        openPanes: [],
+        isLoading: true,
+        isSaving: false,
+        error: ""
     });
     
     const searchParams = useSearchParams();
-    const { data, error, isLoading } = useSWR(`/api/page?url=${searchParams.get('url')}`, fetcher, { refreshInterval: 0, revalidateOnFocus: false, revalidateOnReconnect: false, revalidateIfStale: false});
+    const { data, error, isLoading } = useSWR(`/api/page?url=${searchParams.get('url')}`, fetcher, { refreshInterval: 0, revalidateOnFocus: false, revalidateOnReconnect: false, revalidateIfStale: false });
+    
+    useEffect(() => {
+        let errorMsg = error;
+        if (data && data.message) errorMsg = data.message;
+        if (!data && !isLoading) errorMsg = "Error loading page";
+        
+        setEditor((_editor) => ({
+            ..._editor,
+            error: errorMsg,
+            isLoading,
+            isSaving: false
+        }));
+    }, [data, error, isLoading])
 
     useEffect(() => {
         if (!data) return;

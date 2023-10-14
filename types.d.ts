@@ -30,6 +30,9 @@ type PageInfo = Omit<PageData, "blocks">
 
 
 type PageEditor = {
+    isLoading: boolean,
+    isSaving: boolean,
+    error: string,
     zoom: number,
     openPanes: string[]
 }
