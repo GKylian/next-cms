@@ -422,6 +422,12 @@
         outline: 2px solid #66acf7;
     }
 
+    max-width: 100%;
+
+    &:has(textarea) {
+        width: 100%;
+    }
+
     .text {
         width: 100%;
         user-select: none;

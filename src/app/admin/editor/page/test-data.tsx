@@ -6,8 +6,8 @@ export const testData: PageData = {
     "keywords": ["keyword1", "keyword2", "keyword3"],
     "iconURL": "https://www.example.com/icon.png",
     "author": "Author Name",
-    "createdAt": "2023-10-10T13:46:42.036Z",
-    "updatedAt": "2023-10-14T13:46:42.036Z",
+    "createdAt": new Date(),
+    "updatedAt": new Date(),
     "properties": {},
     "blocks": [
         {
